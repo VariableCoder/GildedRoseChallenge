@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRoseCodeChallenge", "GildedRoseCodeChallenge\GildedRoseCodeChallenge.csproj", "{E2B6E037-2044-42F7-B24A-B44A72F7D1F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2B6E037-2044-42F7-B24A-B44A72F7D1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2B6E037-2044-42F7-B24A-B44A72F7D1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2B6E037-2044-42F7-B24A-B44A72F7D1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2B6E037-2044-42F7-B24A-B44A72F7D1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3034564-D85E-469B-8BD0-8C87805D5877}
+	EndGlobalSection
+EndGlobal
