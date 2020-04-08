@@ -17,7 +17,7 @@ namespace GildedRoseCodeChallenge.Tests
         public InventoryServiceTests()
         {
             _qualityCalculatorMock = new Mock<IQualityCalculator>();
-            _sut = new InventoryService();
+            _sut = new InventoryService(_qualityCalculatorMock.Object);
         }
 
         [Theory]
@@ -33,6 +33,19 @@ namespace GildedRoseCodeChallenge.Tests
             //Assert
             Assert.Equal(expectedSellInValue, item.SellInValue);
 
+        }
+
+        [Fact]
+        public void UpdateInventory_CallQualityCalculator_CorrectNumberOfTimes()
+        {
+            //Arrange
+            var items = new Item[] { TestItemBuilder.Build(), TestItemBuilder.Build(), TestItemBuilder.Build() };
+
+            //Act
+            _sut.UpdateInventory(items);
+
+            //Await
+            _qualityCalculatorMock.Verify(x => x.CalculateQuality(It.IsAny<Item>()), Times.Exactly(items.Length));
         }
 
         public static object[][] Test1InlineData

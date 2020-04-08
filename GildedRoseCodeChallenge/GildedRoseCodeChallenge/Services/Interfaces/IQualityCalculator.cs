@@ -7,7 +7,6 @@ namespace GildedRoseCodeChallenge.Services.Interfaces
 {
     public interface IQualityCalculator
     {
-        void UpdateQuality(IEnumerable<Item> inventoryItems);
         int CalculateQuality(Item inventoryItem);
     }
 }
