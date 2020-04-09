@@ -13,16 +13,13 @@ namespace GildedRoseCodeChallenge.Tests
     public class InventoryServiceTests
     {
         private Mock<IQualityCalculator> _qualityCalculatorMock;
-        private Mock<IDateTimeProvider> _dateTimeProviderMock;
         private IInventoryService _sut;
 
         public InventoryServiceTests()
         {
             _qualityCalculatorMock = new Mock<IQualityCalculator>();
-            _dateTimeProviderMock = new Mock<IDateTimeProvider>();
-            _dateTimeProviderMock.Setup(x => x.GetCurrentDateTime()).Returns(new DateTime(2020, 4, 7));
 
-            _sut = new InventoryService(_qualityCalculatorMock.Object, _dateTimeProviderMock.Object);
+            _sut = new InventoryService(_qualityCalculatorMock.Object);
         }
 
         [Theory]

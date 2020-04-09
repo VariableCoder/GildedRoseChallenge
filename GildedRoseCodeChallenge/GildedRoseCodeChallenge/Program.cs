@@ -25,7 +25,6 @@ namespace GildedRoseCodeChallenge
 
             services.AddTransient<IInventoryService, InventoryService>();
             services.AddSingleton<IQualityCalculator, QualityCalculator>();
-            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             services.AddTransient<Application>();
 
             return services;

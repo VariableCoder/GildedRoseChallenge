@@ -10,12 +10,10 @@ namespace GildedRoseCodeChallenge.Services
     public class InventoryService : IInventoryService
     {
         private IQualityCalculator _qualityCalculator;
-        private IDateTimeProvider _dateTimeProvider;
 
-        public InventoryService(IQualityCalculator qualityCalculator, IDateTimeProvider dateTimeProvider)
+        public InventoryService(IQualityCalculator qualityCalculator)
         {
             _qualityCalculator = qualityCalculator;
-            _dateTimeProvider = dateTimeProvider;
         }
 
         public void UpdateInventory(IEnumerable<Item> items)
