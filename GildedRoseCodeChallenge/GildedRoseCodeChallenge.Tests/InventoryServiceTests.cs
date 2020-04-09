@@ -11,9 +11,9 @@ namespace GildedRoseCodeChallenge.Tests
 {
     public class InventoryServiceTests
     {
-        private readonly Mock<IQualityCalculator> _qualityCalculatorMock;
-        private readonly Mock<IDateTimeProvider> _dateTimeProviderMock;
-        private readonly IInventoryService _sut;
+        private Mock<IQualityCalculator> _qualityCalculatorMock;
+        private Mock<IDateTimeProvider> _dateTimeProviderMock;
+        private IInventoryService _sut;
 
         public InventoryServiceTests()
         {
