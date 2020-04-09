@@ -10,7 +10,6 @@ namespace GildedRoseCodeChallenge.Enums
         BackstagePasses,
         Sulfuras,
         NormalItem,
-        Conjured,
-        InvalidItem
+        Conjured
     }
 }

@@ -52,10 +52,6 @@ namespace GildedRoseCodeChallenge.Services
                 case ItemType.Conjured:
                     rateOfDecay = GetRateOfDegradeForNormalItem(sellInValue, type) * 2;
                     break;
-                case ItemType.InvalidItem:
-                    break;
-                default:
-                    break;
             }
 
             return rateOfDecay;
