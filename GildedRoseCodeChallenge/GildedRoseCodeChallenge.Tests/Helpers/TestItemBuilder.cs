@@ -11,14 +11,14 @@ namespace GildedRoseCodeChallenge.Tests.Helpers
         public static Item Build()
         {
             return new Item()
-                .WithSellByDate()
+                .WithSellInValue()
                 .WithQuality()
                 .WithItemType();
         }
 
-        public static Item WithSellByDate(this Item item, DateTime sellByDate = default)
+        public static Item WithSellInValue(this Item item, int sellInValue = 0)
         {
-            item.SellByDate = sellByDate;
+            item.SellInValue = sellInValue;
             return item;
         }
 

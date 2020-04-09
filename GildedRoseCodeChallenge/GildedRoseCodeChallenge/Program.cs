@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GildedRoseCodeChallenge.Services;
+using GildedRoseCodeChallenge.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace GildedRoseCodeChallenge
 {
@@ -6,7 +9,26 @@ namespace GildedRoseCodeChallenge
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Create service collection and configure our services
+            var services = ConfigureServices();
+
+            // Generate a provider
+            var serviceProvider = services.BuildServiceProvider();
+
+            // Kick off our actual code
+            serviceProvider.GetService<Application>().Run();
+        }
+
+        private static IServiceCollection ConfigureServices()
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddTransient<IInventoryService, InventoryService>();
+            services.AddSingleton<IQualityCalculator, QualityCalculator>();
+            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            services.AddTransient<Application>();
+
+            return services;
         }
     }
 }

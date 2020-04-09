@@ -27,10 +27,10 @@ namespace GildedRoseCodeChallenge.Tests
 
         [Theory]
         [MemberData(nameof(Test1InlineData))]
-        public void UpdateInventory_CalculatesCorrectSellInValue(DateTime sellByDate, int expectedSellInValue)
+        public void UpdateInventory_CalculatesCorrectSellInValue(int sellInValue, int expectedSellInValue)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellByDate(sellByDate);
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue);
 
             //Act
             _sut.UpdateInventory(new Item[] { item });
@@ -55,10 +55,10 @@ namespace GildedRoseCodeChallenge.Tests
 
         [Theory]
         [MemberData(nameof(Test2InlineData))]
-        public void UpdateInventory_CallsQualityCalculator_WithCorrectValues(DateTime sellByDate, int expectedSellInValue, int quality, ItemType type)
+        public void UpdateInventory_CallsQualityCalculator_WithCorrectValues(int sellInValue, int expectedSellInValue, int quality, ItemType type)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellByDate(sellByDate).WithQuality(quality).WithItemType(type);
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(quality).WithItemType(type);
             _qualityCalculatorMock.Setup(x => x.CalculateQuality(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ItemType>())).Returns(It.IsAny<int>());
 
             //Act
@@ -74,9 +74,9 @@ namespace GildedRoseCodeChallenge.Tests
             {
                 return new object[][]
                 {
-                    new object[] {new DateTime(2020,4,4), 3 },
-                    new object[] {new DateTime(2020,4,3), 4 },
-                    new object[] {new DateTime(2020,4,2), 5 },
+                    new object[] {4, 3 },
+                    new object[] {5, 4 },
+                    new object[] {6, 5 },
                 };
             }
         }
@@ -87,9 +87,9 @@ namespace GildedRoseCodeChallenge.Tests
             {
                 return new object[][]
                 {
-                    new object[] {new DateTime(2020,4,4), 3, 20, ItemType.NormalItem },
-                    new object[] {new DateTime(2020,4,3), 4, 30, ItemType.AgedBrie },
-                    new object[] {new DateTime(2020,4,2), 5, 35, ItemType.Sulfuras },
+                    new object[] {4, 3, 20, ItemType.NormalItem },
+                    new object[] {5, 4, 30, ItemType.AgedBrie },
+                    new object[] {6, 5, 35, ItemType.Sulfuras },
                 };
             }
         }

@@ -7,7 +7,6 @@ namespace GildedRoseCodeChallenge.Models
 {
     public class Item
     {
-        public DateTime SellByDate { get; set; }
         public int SellInValue { get; set; }
         public int Quality { get; set; }
         public ItemType Type { get; set; }

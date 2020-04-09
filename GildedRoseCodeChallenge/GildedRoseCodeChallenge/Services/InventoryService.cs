@@ -29,7 +29,7 @@ namespace GildedRoseCodeChallenge.Services
 
         private int CalculateSellInValue(Item item)
         {
-            return _dateTimeProvider.GetCurrentDateTime().Subtract(item.SellByDate).Days;
+            return item.SellInValue - 1;
         }
     }
 }
