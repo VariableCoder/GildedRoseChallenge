@@ -35,11 +35,10 @@ namespace GildedRoseCodeChallenge.Services
                 case ItemType.Sulfuras:
                     break;
                 case ItemType.NormalItem:
-                    rateOfDecay = -1;
-                    if (sellInValue < 0)
-                        rateOfDecay *= 2;
+                    rateOfDecay = GetRateOfDegradeForNormalItem(sellInValue, type);
                     break;
                 case ItemType.Conjured:
+                    rateOfDecay = GetRateOfDegradeForNormalItem(sellInValue, type) * 2;
                     break;
                 case ItemType.InvalidItem:
                     break;
@@ -48,6 +47,12 @@ namespace GildedRoseCodeChallenge.Services
             }
 
             return rateOfDecay;
+        }
+
+        private int GetRateOfDegradeForNormalItem(int sellInValue, ItemType type)
+        {
+            return sellInValue >= 0 ? -1 : -2;
+
         }
     }
 }

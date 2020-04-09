@@ -106,5 +106,20 @@ namespace GildedRoseCodeChallenge.Tests
             //Assert
             Assert.Equal(expectedQuality, result);
         }
+
+        [Theory]
+        [InlineData(5, 10, 8)]
+        [InlineData(-1000, 20, 16)]
+        [InlineData(0, 50, 48)]
+        public void CalculateQuality_WhenItemIsConjured_QualityDropsAtTwiceTheRateOfNormaltems(int sellInValue, int currentQuality, int expectedQuality)
+        {
+            //Arrange
+
+            //Act
+            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.Conjured);
+
+            //Assert
+            Assert.Equal(expectedQuality, result);
+        }
     }
 }
