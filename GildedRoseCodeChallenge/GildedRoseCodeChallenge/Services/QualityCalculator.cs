@@ -8,9 +8,14 @@ namespace GildedRoseCodeChallenge.Services
     public class QualityCalculator : IQualityCalculator
     {
         private int _rateOfDegrade = -1;
+
         public int CalculateQuality(int sellInValue, int currentQuality)
         {
+            if (sellInValue < 0)
+                _rateOfDegrade *= 2;
+
             var quality = currentQuality + _rateOfDegrade;
+
             if (quality < 0)
                 quality = 0;
 

@@ -53,5 +53,20 @@ namespace GildedRoseCodeChallenge.Tests
             //Assert
             Assert.Equal(quality - 1, result);           
         }
+
+        [Theory]
+        [InlineData(-10, 5, 3)]
+        [InlineData(-1000, 20, 18)]
+        [InlineData(-1, 10, 8)]
+        public void CalculateQuality_WhenSellInValueIsNegative_QualityDegradsTwiceAsFast(int sellInValue, int currentQuality, int expectedQuality )
+        {
+            //Arrange
+
+            //Act
+            var result = _sut.CalculateQuality(sellInValue, currentQuality);
+
+            //Assert
+            Assert.Equal(expectedQuality, result);
+        }
     }
 }
