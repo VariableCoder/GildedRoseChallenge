@@ -38,5 +38,20 @@ namespace GildedRoseCodeChallenge.Tests
             //Assert
             Assert.Equal(50, result);
         }
+
+        [Theory]
+        [InlineData(10, 5)]
+        [InlineData(5, 4)]
+        [InlineData(1, 3)]
+        public void CalculateQuality_QualityDropsBy1(int sellInValue, int quality)
+        {
+            //Arrange
+
+            //Act
+            var result = _sut.CalculateQuality(sellInValue, quality);
+
+            //Assert
+            Assert.Equal(quality - 1, result);           
+        }
     }
 }
