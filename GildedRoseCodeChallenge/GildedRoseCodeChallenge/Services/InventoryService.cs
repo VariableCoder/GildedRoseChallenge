@@ -10,23 +10,26 @@ namespace GildedRoseCodeChallenge.Services
     public class InventoryService : IInventoryService
     {
         private IQualityCalculator _qualityCalculator;
+        private IDateTimeProvider _dateTimeProvider;
 
-        public InventoryService(IQualityCalculator qualityCalculator)
+        public InventoryService(IQualityCalculator qualityCalculator, IDateTimeProvider dateTimeProvider)
         {
             _qualityCalculator = qualityCalculator;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public void UpdateInventory(IEnumerable<Item> items)
         {
-            items.ToList().ForEach(x => { 
-                UpdateSellInValue(x);
-                x.Quality = _qualityCalculator.CalculateQuality(x);
+            items.ToList().ForEach(item =>
+            {
+                item.SellInValue = CalculateSellInValue(item);
+                item.Quality = _qualityCalculator.CalculateQuality(item.SellInValue, item.Quality);
             });
         }
 
-        private void UpdateSellInValue(Item item)
+        private int CalculateSellInValue(Item item)
         {
-            item.SellInValue = DateTime.Now.Subtract(item.SellByDate).Days;
+            return _dateTimeProvider.GetCurrentDateTime().Subtract(item.SellByDate).Days;
         }
     }
 }
