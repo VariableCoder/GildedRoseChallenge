@@ -31,6 +31,8 @@ namespace GildedRoseCodeChallenge.Services
                     rateOfDecay = 1;
                     break;
                 case ItemType.BackstagePasses:
+                    if (sellInValue <= 10 && sellInValue > 5)
+                        rateOfDecay = 2;
                     break;
                 case ItemType.Sulfuras:
                     break;
