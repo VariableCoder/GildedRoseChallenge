@@ -23,7 +23,7 @@ namespace GildedRoseCodeChallenge.Services
             items.ToList().ForEach(item =>
             {
                 item.SellInValue = CalculateSellInValue(item);
-                item.Quality = _qualityCalculator.CalculateQuality(item.SellInValue, item.Quality);
+                item.Quality = _qualityCalculator.CalculateQuality(item.SellInValue, item.Quality, item.Type);
             });
         }
 

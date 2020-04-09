@@ -9,7 +9,7 @@ namespace GildedRoseCodeChallenge.Services
     {
         private int _rateOfDegrade = -1;
 
-        public int CalculateQuality(int sellInValue, int currentQuality)
+        public int CalculateQuality(int sellInValue, int currentQuality, Enums.ItemType type)
         {
             if (sellInValue < 0)
                 _rateOfDegrade *= 2;
