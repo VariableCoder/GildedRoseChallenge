@@ -9,6 +9,7 @@ namespace GildedRoseCodeChallenge.Models
     {
         public int SellInValue { get; set; }
         public int Quality { get; set; }
-        public ItemType Type { get; set; }
+        public virtual ItemType Type { get; set; }
+        public virtual int RateOfDegrade { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GildedRoseCodeChallenge.Models;
+﻿using GildedRoseCodeChallenge.Console.Models;
+using GildedRoseCodeChallenge.Models;
 using GildedRoseCodeChallenge.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace GildedRoseCodeChallenge.Services
 
         private int CalculateSellInValue(Item item)
         {
-            if (item.Type == Enums.ItemType.Sulfuras)
+            if (item is Sulfuras)
                 return item.SellInValue;
 
             return item.SellInValue - 1;

@@ -1,4 +1,5 @@
-﻿using GildedRoseCodeChallenge.Enums;
+﻿using GildedRoseCodeChallenge.Console.Models;
+using GildedRoseCodeChallenge.Enums;
 using GildedRoseCodeChallenge.Models;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,34 @@ namespace GildedRoseCodeChallenge.Tests.Helpers
 {
     public static class TestItemBuilder
     {
-        public static Item Build()
+        public static Item Build(ItemType type = ItemType.NormalItem)
         {
-            return new Item()
+            Item item;
+            switch (type)
+            {
+                case ItemType.AgedBrie:
+                    item = new AgedBrie();
+                    break;
+                case ItemType.BackstagePasses:
+                    item = new BackstagePasses();
+                    break;
+                case ItemType.Sulfuras:
+                    item = new Sulfuras();
+                    break;
+                case ItemType.NormalItem:
+                    item = new NormalItem();
+                    break;
+                case ItemType.Conjured:
+                    item = new Conjured();
+                    break;
+                default:
+                    item = new NormalItem();
+                    break;
+            }
+
+            return item
                 .WithSellInValue()
-                .WithQuality()
-                .WithItemType();
+                .WithQuality();
         }
 
         public static Item WithSellInValue(this Item item, int sellInValue = 0)
@@ -25,12 +48,6 @@ namespace GildedRoseCodeChallenge.Tests.Helpers
         public static Item WithQuality(this Item item, int quality = 0)
         {
             item.Quality = quality;
-            return item;
-        }
-
-        public static Item WithItemType(this Item item, ItemType type = ItemType.NormalItem)
-        {
-            item.Type = type;
             return item;
         }
     }

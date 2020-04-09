@@ -23,11 +23,13 @@ namespace GildedRoseCodeChallenge.Tests
         }
 
         [Theory]
-        [MemberData(nameof(Test1InlineData))]
-        public void UpdateInventory_WhenTypeIsNotSulfuras_CalculatesCorrectSellInValue(int sellInValue, int expectedSellInValue)
+        [InlineData(4, 3, ItemType.NormalItem)]
+        [InlineData(5, 4, ItemType.AgedBrie)]
+        [InlineData(6, 5, ItemType.BackstagePasses)]
+        public void UpdateInventory_WhenTypeIsNotSulfuras_CalculatesCorrectSellInValue(int sellInValue, int expectedSellInValue, ItemType type)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue);
+            var item = TestItemBuilder.Build(type).WithSellInValue(sellInValue);
 
             //Act
             _sut.UpdateInventory(item);
@@ -44,7 +46,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void UpdateInventory_WhenTypeIsSulfuras_ReturnsTheSameSellInValue(int sellInValue, ItemType type, int expectedSellInValue)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithItemType(type);
+            var item = TestItemBuilder.Build(type).WithSellInValue(sellInValue);
 
             //Act
             _sut.UpdateInventory(item);
@@ -71,14 +73,14 @@ namespace GildedRoseCodeChallenge.Tests
         public void UpdateInventory_CallsQualityCalculator_WithCorrectValues(int sellInValue, int expectedSellInValue, int quality, ItemType type)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(quality).WithItemType(type);
+            var item = TestItemBuilder.Build(type).WithSellInValue(sellInValue).WithQuality(quality);
             _qualityCalculatorMock.Setup(x => x.CalculateQuality(It.IsAny<Item>())).Returns(It.IsAny<int>());
 
             //Act
             _sut.UpdateInventory(item);
 
             //Assert
-            _qualityCalculatorMock.Verify(x => x.CalculateQuality(item), Times.Once);
+            _qualityCalculatorMock.Verify(x => x.CalculateQuality(It.Is<Item>(x => x.SellInValue == expectedSellInValue)), Times.Once);
         }
 
         public static object[][] Test1InlineData

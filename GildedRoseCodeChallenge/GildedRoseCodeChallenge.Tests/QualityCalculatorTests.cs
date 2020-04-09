@@ -23,7 +23,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_NeverReturnsANegativeValue(int quality, ItemType type)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithQuality(quality).WithItemType(type);
+            var item = TestItemBuilder.Build(type).WithQuality(quality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -41,7 +41,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenCalculatedQualityIsGreatherThan50_Returns50(int quality, ItemType type)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithQuality(quality).WithItemType(type);
+            var item = TestItemBuilder.Build(type).WithQuality(quality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -58,7 +58,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsNormalItem_AndSellInValueIsPositiveOrZero_QualityDropsBy1(int sellInValue, int quality)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(quality).WithItemType(ItemType.NormalItem);
+            var item = TestItemBuilder.Build(ItemType.NormalItem).WithSellInValue(sellInValue).WithQuality(quality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -74,7 +74,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsNormalItem_AndSellInValueIsNegative_QualityDegradsTwiceAsFast(int sellInValue, int currentQuality, int expectedQuality )
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.NormalItem);
+            var item = TestItemBuilder.Build(ItemType.NormalItem).WithSellInValue(sellInValue).WithQuality(currentQuality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -90,7 +90,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsAgedBrie_QualityIncreases(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.AgedBrie);
+            var item = TestItemBuilder.Build(ItemType.AgedBrie).WithSellInValue(sellInValue).WithQuality(currentQuality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -106,7 +106,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsSulphuras_QualityStaysTheSame(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.Sulfuras);
+            var item = TestItemBuilder.Build(ItemType.Sulfuras).WithSellInValue(sellInValue).WithQuality(currentQuality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -122,7 +122,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsConjured_QualityDropsAtTwiceTheRateOfNormaltems(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.Conjured);
+            var item = TestItemBuilder.Build(ItemType.Conjured).WithSellInValue(sellInValue).WithQuality(currentQuality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -137,7 +137,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanOrEquals10_ButGreaterThan5_QualityRisesBy2(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.BackstagePasses);
+            var item = TestItemBuilder.Build(ItemType.BackstagePasses).WithSellInValue(sellInValue).WithQuality(currentQuality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -153,7 +153,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanOrEquals5_ButGreaterThan0_QualityRisesBy3(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.BackstagePasses);
+            var item = TestItemBuilder.Build(ItemType.BackstagePasses).WithSellInValue(sellInValue).WithQuality(currentQuality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -169,7 +169,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanZero_QualityDropsToZero(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.BackstagePasses);
+            var item = TestItemBuilder.Build(ItemType.BackstagePasses).WithSellInValue(sellInValue).WithQuality(currentQuality);
 
             //Act
             var result = _sut.CalculateQuality(item);
@@ -185,7 +185,7 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsNotRecognised_ThrowsNotFoundException(int sellInValue, int currentQuality, ItemType type)
         {
             //Arrange
-            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(type);
+            var item = TestItemBuilder.Build(type).WithSellInValue(sellInValue).WithQuality(currentQuality);
 
             //Act - Assert
             Assert.Throws<InvalidEnumArgumentException>(() => _sut.CalculateQuality(item));
