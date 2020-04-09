@@ -125,7 +125,7 @@ namespace GildedRoseCodeChallenge.Tests
         [Theory]
         [InlineData(10, 15, 17)]
         [InlineData(6, 20, 22)]
-        public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanOrEquals10_ButGreaterThan5_QualityRaisesBy2(int sellInValue, int currentQuality, int expectedQuality)
+        public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanOrEquals10_ButGreaterThan5_QualityRisesBy2(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
 
@@ -135,5 +135,22 @@ namespace GildedRoseCodeChallenge.Tests
             //Assert
             Assert.Equal(expectedQuality, result);
         }
+
+        [Theory]
+        [InlineData(5, 13, 16)]
+        [InlineData(1, 20, 23)]
+        [InlineData(0, 15, 18)]
+        public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanOrEquals5_ButGreaterThan0_QualityRisesBy3(int sellInValue, int currentQuality, int expectedQuality)
+        {
+            //Arrange
+
+            //Act
+            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.BackstagePasses);
+
+            //Assert
+            Assert.Equal(expectedQuality, result);
+        }
+
+
     }
 }
