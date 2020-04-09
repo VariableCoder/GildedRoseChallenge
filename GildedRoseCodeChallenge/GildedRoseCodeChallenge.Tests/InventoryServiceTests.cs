@@ -63,7 +63,7 @@ namespace GildedRoseCodeChallenge.Tests
             _sut.UpdateInventory(item);
 
             //Await
-            _qualityCalculatorMock.Verify(x => x.CalculateQuality(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ItemType>()), Times.Once);
+            _qualityCalculatorMock.Verify(x => x.CalculateQuality(It.IsAny<Item>()), Times.Once);
         }
 
         [Theory]
@@ -72,13 +72,13 @@ namespace GildedRoseCodeChallenge.Tests
         {
             //Arrange
             var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(quality).WithItemType(type);
-            _qualityCalculatorMock.Setup(x => x.CalculateQuality(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ItemType>())).Returns(It.IsAny<int>());
+            _qualityCalculatorMock.Setup(x => x.CalculateQuality(It.IsAny<Item>())).Returns(It.IsAny<int>());
 
             //Act
             _sut.UpdateInventory(item);
 
             //Assert
-            _qualityCalculatorMock.Verify(x => x.CalculateQuality(expectedSellInValue, quality, type), Times.Once);
+            _qualityCalculatorMock.Verify(x => x.CalculateQuality(item), Times.Once);
         }
 
         public static object[][] Test1InlineData

@@ -1,4 +1,5 @@
 ﻿using GildedRoseCodeChallenge.Enums;
+using GildedRoseCodeChallenge.Models;
 using GildedRoseCodeChallenge.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,12 @@ namespace GildedRoseCodeChallenge.Services
 {
     public class QualityCalculator : IQualityCalculator
     {
-        public int CalculateQuality(int sellInValue, int currentQuality, ItemType type)
+        public int CalculateQuality(Item item)
         {
-            if (!Enum.IsDefined(typeof(ItemType), (int)type))
+            if (!Enum.IsDefined(typeof(ItemType), (int)item.Type))
                 throw new InvalidEnumArgumentException();
 
-            var quality = currentQuality + GetRateOfDegrade(sellInValue, type, currentQuality);
+            var quality = item.Quality + GetRateOfDegrade(item.SellInValue, item.Type, item.Quality);
 
             if (quality < 0)
                 quality = 0;

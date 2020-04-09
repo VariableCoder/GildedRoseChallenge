@@ -8,6 +8,6 @@ namespace GildedRoseCodeChallenge.Services.Interfaces
 {
     public interface IQualityCalculator
     {
-        int CalculateQuality(int sellInValue, int currentQuality, ItemType type);
+        int CalculateQuality(Item item);
     }
 }

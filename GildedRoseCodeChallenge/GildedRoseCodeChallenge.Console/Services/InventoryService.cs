@@ -19,7 +19,7 @@ namespace GildedRoseCodeChallenge.Services
         public void UpdateInventory(Item item)
         {
                 item.SellInValue = CalculateSellInValue(item);
-                item.Quality = _qualityCalculator.CalculateQuality(item.SellInValue, item.Quality, item.Type);
+                item.Quality = _qualityCalculator.CalculateQuality(item);
         }
 
         private int CalculateSellInValue(Item item)

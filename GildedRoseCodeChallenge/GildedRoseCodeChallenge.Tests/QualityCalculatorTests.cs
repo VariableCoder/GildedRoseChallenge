@@ -1,5 +1,6 @@
 ﻿using GildedRoseCodeChallenge.Enums;
 using GildedRoseCodeChallenge.Services;
+using GildedRoseCodeChallenge.Tests.Helpers;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_NeverReturnsANegativeValue(int quality, ItemType type)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithQuality(quality).WithItemType(type);
 
             //Act
-            var result = _sut.CalculateQuality(0, quality, type);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(0, result);
@@ -39,9 +41,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenCalculatedQualityIsGreatherThan50_Returns50(int quality, ItemType type)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithQuality(quality).WithItemType(type);
 
             //Act
-            var result = _sut.CalculateQuality(0, quality, type);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(50, result);
@@ -55,9 +58,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsNormalItem_AndSellInValueIsPositiveOrZero_QualityDropsBy1(int sellInValue, int quality)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(quality).WithItemType(ItemType.NormalItem);
 
             //Act
-            var result = _sut.CalculateQuality(sellInValue, quality, ItemType.NormalItem);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(quality - 1, result);           
@@ -70,9 +74,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsNormalItem_AndSellInValueIsNegative_QualityDegradsTwiceAsFast(int sellInValue, int currentQuality, int expectedQuality )
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.NormalItem);
 
             //Act
-            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.NormalItem);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(expectedQuality, result);
@@ -85,9 +90,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsAgedBrie_QualityIncreases(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.AgedBrie);
 
             //Act
-            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.AgedBrie);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(expectedQuality, result);
@@ -100,9 +106,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsSulphuras_QualityStaysTheSame(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.Sulfuras);
 
             //Act
-            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.Sulfuras);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(expectedQuality, result);
@@ -115,9 +122,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsConjured_QualityDropsAtTwiceTheRateOfNormaltems(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.Conjured);
 
             //Act
-            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.Conjured);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(expectedQuality, result);
@@ -129,9 +137,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanOrEquals10_ButGreaterThan5_QualityRisesBy2(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.BackstagePasses);
 
             //Act
-            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.BackstagePasses);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(expectedQuality, result);
@@ -144,9 +153,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanOrEquals5_ButGreaterThan0_QualityRisesBy3(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.BackstagePasses);
 
             //Act
-            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.BackstagePasses);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(expectedQuality, result);
@@ -159,9 +169,10 @@ namespace GildedRoseCodeChallenge.Tests
         public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanZero_QualityDropsToZero(int sellInValue, int currentQuality, int expectedQuality)
         {
             //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(ItemType.BackstagePasses);
 
             //Act
-            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.BackstagePasses);
+            var result = _sut.CalculateQuality(item);
 
             //Assert
             Assert.Equal(expectedQuality, result);
@@ -173,8 +184,11 @@ namespace GildedRoseCodeChallenge.Tests
         [InlineData(500, 20, (ItemType)15)]
         public void CalculateQuality_WhenItemIsNotRecognised_ThrowsNotFoundException(int sellInValue, int currentQuality, ItemType type)
         {
-            //Assert
-            Assert.Throws<InvalidEnumArgumentException>(() => _sut.CalculateQuality(sellInValue, currentQuality, type));
+            //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithQuality(currentQuality).WithItemType(type);
+
+            //Act - Assert
+            Assert.Throws<InvalidEnumArgumentException>(() => _sut.CalculateQuality(item));
         }
     }
 }
