@@ -2,6 +2,7 @@
 using GildedRoseCodeChallenge.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace GildedRoseCodeChallenge.Services
@@ -10,6 +11,9 @@ namespace GildedRoseCodeChallenge.Services
     {
         public int CalculateQuality(int sellInValue, int currentQuality, ItemType type)
         {
+            if (!Enum.IsDefined(typeof(ItemType), (int)type))
+                throw new InvalidEnumArgumentException();
+
             var quality = currentQuality + GetRateOfDegrade(sellInValue, type, currentQuality);
 
             if (quality < 0)

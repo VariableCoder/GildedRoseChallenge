@@ -3,6 +3,7 @@ using GildedRoseCodeChallenge.Services;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using Xunit;
 
@@ -164,6 +165,16 @@ namespace GildedRoseCodeChallenge.Tests
 
             //Assert
             Assert.Equal(expectedQuality, result);
+        }
+
+        [Theory]
+        [InlineData(-5, 4, (ItemType)8)]
+        [InlineData(-1, 35, (ItemType)20)]
+        [InlineData(500, 20, (ItemType)15)]
+        public void CalculateQuality_WhenItemIsNotRecognised_ThrowsNotFoundException(int sellInValue, int currentQuality, ItemType type)
+        {
+            //Assert
+            Assert.Throws<InvalidEnumArgumentException>(() => _sut.CalculateQuality(sellInValue, currentQuality, type));
         }
     }
 }
