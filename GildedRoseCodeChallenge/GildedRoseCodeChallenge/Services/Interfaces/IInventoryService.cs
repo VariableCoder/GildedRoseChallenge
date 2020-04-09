@@ -7,6 +7,6 @@ namespace GildedRoseCodeChallenge.Services.Interfaces
 {
     public interface IInventoryService
     {
-        void UpdateInventory(IEnumerable<Item> items);
+        void UpdateInventory(Item item);
     }
 }

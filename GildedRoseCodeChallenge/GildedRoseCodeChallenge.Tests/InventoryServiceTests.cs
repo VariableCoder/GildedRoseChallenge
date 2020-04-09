@@ -30,7 +30,7 @@ namespace GildedRoseCodeChallenge.Tests
             var item = TestItemBuilder.Build().WithSellInValue(sellInValue);
 
             //Act
-            _sut.UpdateInventory(new Item[] { item });
+            _sut.UpdateInventory(item);
 
             //Assert
             Assert.Equal(expectedSellInValue, item.SellInValue);
@@ -41,13 +41,13 @@ namespace GildedRoseCodeChallenge.Tests
         public void UpdateInventory_CallsQualityCalculator_CorrectNumberOfTimes()
         {
             //Arrange
-            var items = new Item[] { TestItemBuilder.Build(), TestItemBuilder.Build(), TestItemBuilder.Build() };
+            var item = TestItemBuilder.Build();
 
             //Act
-            _sut.UpdateInventory(items);
+            _sut.UpdateInventory(item);
 
             //Await
-            _qualityCalculatorMock.Verify(x => x.CalculateQuality(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ItemType>()), Times.Exactly(items.Length));
+            _qualityCalculatorMock.Verify(x => x.CalculateQuality(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ItemType>()), Times.Once);
         }
 
         [Theory]
@@ -59,7 +59,7 @@ namespace GildedRoseCodeChallenge.Tests
             _qualityCalculatorMock.Setup(x => x.CalculateQuality(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ItemType>())).Returns(It.IsAny<int>());
 
             //Act
-            _sut.UpdateInventory(new Item[] { item });
+            _sut.UpdateInventory(item);
 
             //Assert
             _qualityCalculatorMock.Verify(x => x.CalculateQuality(expectedSellInValue, quality, type), Times.Once);

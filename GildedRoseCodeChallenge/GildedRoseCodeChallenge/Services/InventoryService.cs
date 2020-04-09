@@ -16,13 +16,10 @@ namespace GildedRoseCodeChallenge.Services
             _qualityCalculator = qualityCalculator;
         }
 
-        public void UpdateInventory(IEnumerable<Item> items)
+        public void UpdateInventory(Item item)
         {
-            items.ToList().ForEach(item =>
-            {
                 item.SellInValue = CalculateSellInValue(item);
                 item.Quality = _qualityCalculator.CalculateQuality(item.SellInValue, item.Quality, item.Type);
-            });
         }
 
         private int CalculateSellInValue(Item item)
