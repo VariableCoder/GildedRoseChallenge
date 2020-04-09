@@ -24,7 +24,7 @@ namespace GildedRoseCodeChallenge.Tests
 
         [Theory]
         [MemberData(nameof(Test1InlineData))]
-        public void UpdateInventory_CalculatesCorrectSellInValue(int sellInValue, int expectedSellInValue)
+        public void UpdateInventory_WhenTypeIsNotSulfuras_CalculatesCorrectSellInValue(int sellInValue, int expectedSellInValue)
         {
             //Arrange
             var item = TestItemBuilder.Build().WithSellInValue(sellInValue);
@@ -35,6 +35,22 @@ namespace GildedRoseCodeChallenge.Tests
             //Assert
             Assert.Equal(expectedSellInValue, item.SellInValue);
 
+        }
+
+        [Theory]
+        [InlineData(2, ItemType.Sulfuras, 2)]
+        [InlineData(60, ItemType.Sulfuras, 60)]
+        [InlineData(-5, ItemType.Sulfuras, -5)]
+        public void UpdateInventory_WhenTypeIsSulfuras_ReturnsTheSameSellInValue(int sellInValue, ItemType type, int expectedSellInValue)
+        {
+            //Arrange
+            var item = TestItemBuilder.Build().WithSellInValue(sellInValue).WithItemType(type);
+
+            //Act
+            _sut.UpdateInventory(item);
+
+            //Assert
+            Assert.Equal(expectedSellInValue, item.SellInValue);
         }
 
         [Fact]
@@ -86,7 +102,7 @@ namespace GildedRoseCodeChallenge.Tests
                 {
                     new object[] {4, 3, 20, ItemType.NormalItem },
                     new object[] {5, 4, 30, ItemType.AgedBrie },
-                    new object[] {6, 5, 35, ItemType.Sulfuras },
+                    new object[] {6, 6, 35, ItemType.Sulfuras },
                 };
             }
         }

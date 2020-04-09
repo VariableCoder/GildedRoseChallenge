@@ -43,6 +43,9 @@ namespace GildedRoseCodeChallenge
                     Console.WriteLine("NO SUCH ITEM");
                 }
             });
+
+            Console.WriteLine("Press any key to exit the application : ");
+            Console.ReadKey();
         }
     }
 }

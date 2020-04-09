@@ -24,6 +24,9 @@ namespace GildedRoseCodeChallenge.Services
 
         private int CalculateSellInValue(Item item)
         {
+            if (item.Type == Enums.ItemType.Sulfuras)
+                return item.SellInValue;
+
             return item.SellInValue - 1;
         }
     }
