@@ -91,5 +91,20 @@ namespace GildedRoseCodeChallenge.Tests
             //Assert
             Assert.Equal(expectedQuality, result);
         }
+
+        [Theory]
+        [InlineData(5, 2, 2)]
+        [InlineData(-1000, 20, 20)]
+        [InlineData(0, 10, 10)]
+        public void CalculateQuality_WhenItemIsSulphuras_QualityStaysTheSame(int sellInValue, int currentQuality, int expectedQuality)
+        {
+            //Arrange
+
+            //Act
+            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.Sulfuras);
+
+            //Assert
+            Assert.Equal(expectedQuality, result);
+        }
     }
 }
