@@ -24,5 +24,19 @@ namespace GildedRoseCodeChallenge.Tests
             //Assert
             Assert.Equal(0, result);
         }
+
+        [Theory]
+        [InlineData(55)]
+        [InlineData(60)]
+        public void CalculateQuality_WhenCalculatedQualityIsGreatherThan50_Returns50(int quality)
+        {
+            //Arrange
+
+            //Act
+            var result = _sut.CalculateQuality(0, quality);
+
+            //Assert
+            Assert.Equal(50, result);
+        }
     }
 }

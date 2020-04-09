@@ -13,6 +13,9 @@ namespace GildedRoseCodeChallenge.Services
             if (quality < 0)
                 quality = 0;
 
+            if (quality > 50)
+                quality = 50;
+
             return quality;
         }
     }
