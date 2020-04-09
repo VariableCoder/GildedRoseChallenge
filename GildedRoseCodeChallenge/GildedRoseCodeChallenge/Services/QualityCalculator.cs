@@ -10,7 +10,7 @@ namespace GildedRoseCodeChallenge.Services
     {
         public int CalculateQuality(int sellInValue, int currentQuality, ItemType type)
         {
-            var quality = currentQuality + GetRateOfDegrade(sellInValue, type);
+            var quality = currentQuality + GetRateOfDegrade(sellInValue, type, currentQuality);
 
             if (quality < 0)
                 quality = 0;
@@ -21,7 +21,7 @@ namespace GildedRoseCodeChallenge.Services
             return quality;
         }
 
-        private int GetRateOfDegrade(int sellInValue, ItemType type)
+        private int GetRateOfDegrade(int sellInValue, ItemType type, int currentQuality)
         {
             var rateOfDecay = 0;
 
@@ -36,6 +36,9 @@ namespace GildedRoseCodeChallenge.Services
 
                     if (sellInValue <= 5 && sellInValue >= 0)
                         rateOfDecay = 3;
+
+                    if (sellInValue < 0)
+                        rateOfDecay = -currentQuality;
                     break;
                 case ItemType.Sulfuras:
                     break;

@@ -151,6 +151,19 @@ namespace GildedRoseCodeChallenge.Tests
             Assert.Equal(expectedQuality, result);
         }
 
+        [Theory]
+        [InlineData(-2, 8, 0)]
+        [InlineData(-1, 20, 0)]
+        [InlineData(-500, 15, 0)]
+        public void CalculateQuality_WhenItemIsBackstagePasses_AndSellInValueLessThanZero_QualityDropsToZero(int sellInValue, int currentQuality, int expectedQuality)
+        {
+            //Arrange
 
+            //Act
+            var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.BackstagePasses);
+
+            //Assert
+            Assert.Equal(expectedQuality, result);
+        }
     }
 }
