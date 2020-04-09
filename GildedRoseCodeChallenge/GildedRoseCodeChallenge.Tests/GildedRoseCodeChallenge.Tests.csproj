@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GildedRoseCodeChallenge\GildedRoseCodeChallenge.csproj" />
+    <ProjectReference Include="..\GildedRoseCodeChallenge.Console\GildedRoseCodeChallenge.Console.csproj" />
   </ItemGroup>
 
 </Project>

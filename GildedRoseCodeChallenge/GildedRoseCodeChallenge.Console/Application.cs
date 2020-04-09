@@ -38,13 +38,13 @@ namespace GildedRoseCodeChallenge
                     _inventoryService.UpdateInventory(item);
                     Console.WriteLine($"{item.Type} {item.SellInValue} {item.Quality}");
                 }
-                catch (InvalidEnumArgumentException ex)
+                catch (InvalidEnumArgumentException)
                 {
                     Console.WriteLine("NO SUCH ITEM");
                 }
             });
 
-            Console.WriteLine("Press any key to exit the application : ");
+            Console.WriteLine("\nPress any key to exit the application : ");
             Console.ReadKey();
         }
     }
