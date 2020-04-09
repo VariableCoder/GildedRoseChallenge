@@ -51,7 +51,7 @@ namespace GildedRoseCodeChallenge.Tests
         [InlineData(5, 4)]
         [InlineData(1, 3)]
         [InlineData(0, 10)]
-        public void CalculateQuality_WhenIsNormalItem_AndSellInValueIsPositiveOrZero_QualityDropsBy1(int sellInValue, int quality)
+        public void CalculateQuality_WhenItemIsNormalItem_AndSellInValueIsPositiveOrZero_QualityDropsBy1(int sellInValue, int quality)
         {
             //Arrange
 
@@ -66,7 +66,7 @@ namespace GildedRoseCodeChallenge.Tests
         [InlineData(-10, 5, 3)]
         [InlineData(-1000, 20, 18)]
         [InlineData(-1, 10, 8)]
-        public void CalculateQuality_WhenIsNormalItem_AndSellInValueIsNegative_QualityDegradsTwiceAsFast(int sellInValue, int currentQuality, int expectedQuality )
+        public void CalculateQuality_WhenItemIsNormalItem_AndSellInValueIsNegative_QualityDegradsTwiceAsFast(int sellInValue, int currentQuality, int expectedQuality )
         {
             //Arrange
 
@@ -87,6 +87,9 @@ namespace GildedRoseCodeChallenge.Tests
 
             //Act
             var result = _sut.CalculateQuality(sellInValue, currentQuality, ItemType.AgedBrie);
+
+            //Assert
+            Assert.Equal(expectedQuality, result);
         }
     }
 }
